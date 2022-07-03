@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block body %}
+    <main class="container">
+       <h1>My shop</h1>
+       <h4>Articles disponibles:</h4>
+       <br>
+       <section class="row">
+       {% for article in articles %}
+        <article class="col-4 mb-3 align-items-center text-center">
+        <div class="card">
+            <h1 class="card-header h5">{{ article.titre }}</h1>
+            <div class="card-body">
+            <img src="/upload{{ asset(article.photo)}}" alt="" class="card-body img-fluid img-thumbnail border-dark">
+                <p>{{article.description}}</p>
+                <p>collection: {{article.collection}}</p>
+                <p>taille: {{article.taille}}</p>
+                <p>{{article.prix}}€</p>
+            </div>
+            <footer class="card-footer">
+                {#<button class="btn btn-primary btn-sm px-5 py-2">Ajouter🧺</button>#}
+                <a class="btn btn-primary btn-sm px-5 py-2">Ajouter🧺</a>
+            </footer>
+        </div>
+        </article>
+       {% endfor %}
+       </section>
+       </div>
+        <div class="navigation d-flex justify-content-center my-3">
+        {{ knp_pagination_render(articles) }}
+        </div>
+    </main>
+{% endblock %}

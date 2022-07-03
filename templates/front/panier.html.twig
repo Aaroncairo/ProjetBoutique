@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<h1>Votre panier :</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#id</th>
+            <th>titre</th>
+            <th>prix unitaire</th>
+            <th>qte</th>
+            <th>total produit</th>
+            <th>action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in produitsDuPanier %}
+            <tr>
+                <td>{{ item.article.id }}</td>
+                <td>{{ item.article.titre }}</td>
+                <td>{{ item.article.prix }} €</td>
+                <td>
+                    <a href="" class="btn btn-warning">-</a>
+                    <span class="mx-3">{{ item.qte }}</span>
+                    <a href="" class="btn btn-warning">+</a>
+                </td>
+                <td>{{ item.qte * item.article.prix }}  €</td>
+                <td><a href="" class="btn btn-danger">supprimer</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colSpan="4" class="text-end">
+                Total :
+            </td>
+            <td>
+                {{totalPanier}} €
+            </td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+<div class="text-end">
+    <a href="" class="btn btn-success">Commander</a>
+</div>
+{% endblock %}

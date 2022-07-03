@@ -1,0 +1,46 @@
+{% extends "back-office.html.twig" %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block body %}
+    <h1>Liste des produits disponibles</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr class="text-center">
+                <th style="width:5%">id</th>
+                <th style="width:15%">titre</th>
+                <th style="width:15%">description</th>
+                <th style="width:10%">couleur</th>
+                <th style="width:5%">taille</th>
+                <th style="width:5%">collection</th>
+                <th style="width:20%">photo</th>
+                <th style="width:5%">prix</th>
+                <th style="width:5%">stock</th>
+                <th style="width:15%">actions</th>
+            </tr>
+            
+        </thead>
+        <tbody>
+            {%  for produit in produits %}
+                <tr class="text-center">
+                    <td class="align-middle">{{produit.id}}</td>
+                    <td class="align-middle">{{produit.titre}}</td>
+                    <td class="align-middle">{{produit.description}}</td>
+                    <td class="align-middle">{{produit.couleur}}</td>
+                    <td class="align-middle">{{produit.taille}}</td>
+                    <td class="align-middle">{{produit.collection}}</td>
+                    <td class="align-middle"><img src="/upload{{ asset(produit.photo)}}" alt="" class="img-fluid img-thumbnail border-dark"></td>
+                    <td class="text-end align-middle">{{produit.prix}}€</td>
+                    <td class="align-middle">{{produit.stock}}</td>
+                    <td class="align-middle">
+                        {% include "commun/actions.html.twig" with {"id" : produit.id , "update": "produit_update" , "delete" : "produit_suppr" }%}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colSpan="8">aucun produit enregistré pour le moment</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
